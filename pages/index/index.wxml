@@ -15,7 +15,8 @@
 <!-- 新闻列表 -->
 <view class="news-list">
   <!-- 2020新版编译器wx:key="{{item.id}}"会报错，应该写成wx:key="id" -->
-  <view class="news-item" wx:for="{{newsList}}" wx:key="id">
+  <!-- bindtap绑定点击跳转页面 -->
+  <view class="news-item" wx:for="{{newsList}}" wx:key="id" bindtap="goToDetail" data-id="{{item.id}}">
     <image src="{{item.poster}}"></image>
     <text>{{item.title}}——{{item.add_date}}</text>
   </view>

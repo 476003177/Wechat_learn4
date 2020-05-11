@@ -1,4 +1,6 @@
 // pages/detail/detail.js
+var common = require("../../utils/common.js")//访问common.js
+
 Page({
 
   /**
@@ -11,33 +13,26 @@ Page({
       { src: "http://i2.chinanews.com/simg/cmshd/2019/10/05/998e12aa71f248d4a797761b18e48418.jpg" },
       { src: "http://i2.chinanews.com/simg/cmshd/2019/10/01/c5391220f28d49bdbd14c58a4300bde0.jpg" }
     ],
-    newsList: [
-      {
-        id: "356412",
-        title: "特写：2019，天安门城楼前的中国",
-        poster: "http://image1.chinanews.com.cn/cnsupload/big/2019/10-01/4-426/a7e426b0dd6c43d2bc710fafe810a0d5.jpg",
-        add_date: "2019-10-01"
-      },
-      {
-        id: "546734",
-        title: "中国成功发射高分十号卫星 主要用于国土普查、防灾减灾等领域",
-        poster: "http://i2.chinanews.com/simg/cmshd/2019/10/05/998e12aa71f248d4a797761b18e48418.jpg",
-        add_date: "2019-10-05"
-      },
-      {
-        id: "239875",
-        title: "记者手记：国家庆典，每个人都是记录者",
-        poster: "http://i2.chinanews.com/simg/cmshd/2019/10/01/c5391220f28d49bdbd14c58a4300bde0.jpg",
-        add_date: "2019-10-01"
-      }
-    ]
+    newsList: []//先定义newsList，数据在onload获取，通过common.js
+  },
+
+  goToDetail:function(e){
+    // 获取携带data-id的数据
+    let id = e.currentTarget.dataset.id
+    // 携带新闻id进行页面跳转
+    wx.navigateTo({
+      url: '../detail/detail?id=' + id,
+    })
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    let list = common.getNewsList()
+    this.setData({
+      newsList:list
+    })
   },
 
   /**

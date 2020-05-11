@@ -52,3 +52,9 @@ function getNewsDetail(newsID){
   }
   return message;
 }
+
+//向外暴露接口
+module.exports = {
+  getNewsList:getNewsList,
+  getNewsDetail:getNewsDetail
+}
