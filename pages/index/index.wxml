@@ -1,0 +1,24 @@
+<!-- 幻灯片 -->
+<!-- 1. indicator-dots：幻灯片播放时是否会显示小点
+     2. autoplay：是否会自动播放
+     3. interval：播放的间隔时间
+     4. duration：动画持续过程-->
+<swiper indicator-dots="true" autoplay="true" interval="5000" duration="500">
+  <!-- 2020新版编译器wx:key="{{index}}"会报错，应该写成wx:key="index" -->
+  <view wx:for="{{swiperImg}}" wx:key="index" >
+    <!-- 幻灯片具体的内容 -->
+    <swiper-item>
+      <image src="{{item.src}}"></image>
+    </swiper-item>
+  </view>
+</swiper>
+<!-- 新闻列表 -->
+<view class="news-list">
+  <!-- 2020新版编译器wx:key="{{item.id}}"会报错，应该写成wx:key="id" -->
+  <view class="news-item" wx:for="{{newsList}}" wx:key="id">
+    <image src="{{item.poster}}"></image>
+    <text>{{item.title}}——{{item.add_date}}</text>
+  </view>
+  <!-- plain为镂空效果 -->
+  <button plain="true">加载更多</button>
+</view>

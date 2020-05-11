@@ -1,0 +1,11 @@
+<view class="container">
+  <view class="title">{{article.title}}</view>
+  <view class="poster">
+    <image src="{{article.poster}}"></image>
+  </view>
+  <view class="cotent">
+    <!-- 换行符\n无法被view识别，因此要用text来包装带\n的字符串 -->
+    <text>{{article.content}}</text>
+  </view>
+  <view class="add_date">{{article.add_date}}</view>
+</view>
