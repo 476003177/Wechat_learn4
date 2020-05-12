@@ -23,3 +23,8 @@
   margin-right: 25rpx;
   margin-top: 20rpx;
 }
+button{
+  width: 250rpx;
+  height: 100rpx;
+  margin: 20rpx auto;
+}
