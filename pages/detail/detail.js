@@ -31,7 +31,7 @@ Page({
   // 取消收藏
   cancelFavorites:function(){
     let article = this.data.article
-    wx.removeStorageSync(article.id)//清除缓存区数据
+    wx.removeStorageSync(article.id)//清除相应的缓存区数据
     this.setData({
       isAdd:false
     })

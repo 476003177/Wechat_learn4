@@ -1,16 +1,20 @@
 <!-- 登录页面 -->
 <view class="myLogin">
-  <image src="{{src}}"></image>
-  <text>{{nickName}}</text>
+  <!-- block与view差不多，布尔值默认是false -->
+  <block wx:if="{{isLogin}}">
+    <image src="{{src}}"></image>
+    <text>{{nickName}}</text>
+  </block>
+  <button wx:else open-type="getUserInfo" bindgetuserinfo="getMyInfo">未登录，点此登录</button>
 </view>
 <!-- 收藏夹 -->
 <view class="myFavorite">
-  <text>我的收藏（1）</text>
+  <text>我的收藏{{number}}</text>
   <!-- 新闻列表 -->
   <view class="news-list">
-    <view class="news-item" wx:for="{{newsList}}" wx:key="id">
-      <image src="{{item.poster}}"></image>
-      <text>{{item.title}}——{{item.add_date}}</text>
-    </view>
+    <view class="news-item" wx:for="{{newsList}}" wx:key="id" bindtap="goToDetail" data-id="{{item.id}}">
+    <image src="{{item.poster}}"></image>
+    <text>{{item.title}}——{{item.add_date}}</text>
+  </view>
   </view>
 </view>
