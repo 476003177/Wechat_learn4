@@ -20,6 +20,10 @@ Page({
     // 获取携带data-id的数据
     let id = e.currentTarget.dataset.id
     // 携带新闻id进行页面跳转
+    // wx.navigateTo()：保留当前页面，并在上方打开指定新页面，可按返回或者wx.navigateBack()接口返回到原页面；参数与路径之间用？相隔，参数键与参数值之间用=相连，多个参数用&分隔
+    // wx.redirectTo()：关闭当前页面内容，重定向到应用内的某个页面，参数与wx.navigateTo()相同
+    // wx.reLaunch()：关闭所有页面，重新打开应用内的某个页面，参数与wx.navigateTo()相同
+    // wx.navigateBack({delta})：关闭当前页面，返回deta层页面
     wx.navigateTo({
       url: '../detail/detail?id=' + id,
     })
