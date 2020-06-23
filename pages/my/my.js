@@ -30,7 +30,7 @@ Page({
     // 获取新闻收藏列表
     this.getMyFavorites()
     // 提示框
-    //title：提示内容
+    // title：提示内容
     // duration：提示延迟时间，若时间太长可用wx.hideToast()关闭提示框
     // icon: 图标，只有三种选择——success、loading、None，success"、"loading"会使得title最多显示七个字，"None"则使得title最多显示两行
     // image：自定义本地图标路径，优先级比icon高

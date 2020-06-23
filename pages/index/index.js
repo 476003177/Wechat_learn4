@@ -1,6 +1,9 @@
 // pages/detail/detail.js
 var common = require("../../utils/common.js")//访问common.js
 
+var isEnd = false//判断新闻是否加载完毕，php版本
+var currentPage = 1//当前页面，php版本
+
 Page({
 
   /**
@@ -8,12 +11,15 @@ Page({
    */
   // 数组用[]，里面每个数据用{}
   data: {
-    swiperImg: [
-      { src: "http://image1.chinanews.com.cn/cnsupload/big/2019/10-01/4-426/a7e426b0dd6c43d2bc710fafe810a0d5.jpg" },
-      { src: "http://i2.chinanews.com/simg/cmshd/2019/10/05/998e12aa71f248d4a797761b18e48418.jpg" },
-      { src: "http://i2.chinanews.com/simg/cmshd/2019/10/01/c5391220f28d49bdbd14c58a4300bde0.jpg" }
-    ],
-    newsList: []//先定义newsList，数据在onload获取，通过common.js
+    // 单机版，php版本不再读取swiperImg
+    // swiperImg: [
+    //   { src: "http://image1.chinanews.com.cn/cnsupload/big/2019/10-01/4-426/a7e426b0dd6c43d2bc710fafe810a0d5.jpg" },
+    //   { src: "http://i2.chinanews.com/simg/cmshd/2019/10/05/998e12aa71f248d4a797761b18e48418.jpg" },
+    //   { src: "http://i2.chinanews.com/simg/cmshd/2019/10/01/c5391220f28d49bdbd14c58a4300bde0.jpg" }
+    // ],
+    newsList: [],//先定义newsList，数据在onload获取，通过common.js
+    loading:false,//按钮loading特效
+    loadMoreText:"加载更多"
   },
 
   goToDetail:function(e){
@@ -29,14 +35,48 @@ Page({
     })
   },
 
+  // 获取指定页数的新闻列表，php版本
+  getNewsByPage:function(page){
+    var that = this
+    wx.request({
+      url: common.getNewsList,//url本身是字符串要加""，但是此处是调用函数所以不用加""
+      data:{
+        page:page
+      },
+      success:function(res){
+        // 获取新闻总数
+        let total = res.data.total
+        // 追加更多的新闻数据
+        let list = that.data.newsList.concat(res.data.list)
+        that.setData({
+          newsList:list,
+          total:total
+        })
+        // 如果已经显示全部新闻
+        if(list.length==total){
+          isEnd = true
+          that.setData({
+            loadMoreText:"已无更多"
+          })
+        }else{
+          currentPage++
+        }
+      }
+    })
+  },
+
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    let list = common.getNewsList()
-    this.setData({
-      newsList:list
-    })
+    // 单机版本
+    // let list = common.getNewsList()
+    // this.setData({
+    //   newsList:list
+    // })
+
+    // php版本
+    this.getNewsByPage(1)
   },
 
   /**

@@ -5,10 +5,14 @@
      4. duration：动画持续过程-->
 <swiper indicator-dots="true" autoplay="true" interval="5000" duration="500">
   <!-- 2020新版编译器wx:key="{{index}}"会报错，应该写成wx:key="index" -->
-  <view wx:for="{{swiperImg}}" wx:key="index" >
+  <!-- 单机版本 -->
+  <!-- <view wx:for="{{swiperImg}}" wx:key="index" > -->
+  <!-- php版本，读取newsList.poster里面的图作为轮播图 -->
+  <view wx:for="{{[newsList[0],newsList[1],newsList[2]]}}" wx:key="index">
     <!-- 幻灯片具体的内容 -->
     <swiper-item>
-      <image src="{{item.src}}"></image>
+      <!-- <image src="{{item.src}}"></image> -->
+      <image src="{{item.poster}}"></image>
     </swiper-item>
   </view>
 </swiper>
@@ -21,5 +25,5 @@
     <text>{{item.title}}——{{item.add_date}}</text>
   </view>
   <!-- plain为镂空效果 -->
-  <button plain="true">加载更多</button>
+  <button plain="true" loading="{{loading}}">{{loadMoreText}}</button>
 </view>
